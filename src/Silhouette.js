@@ -265,7 +265,7 @@ class Silhouette {
     /**
      * Get the canvas element reused by Silhouettes to update their data with.
      * @private
-     * @return {CanvasElement} A canvas to draw bitmap data to.
+     * @return {CanvasElement} A canvas to draw bitmap data to
      */
     static _updateCanvas () {
         if (typeof __SilhouetteUpdateCanvas === 'undefined') {
