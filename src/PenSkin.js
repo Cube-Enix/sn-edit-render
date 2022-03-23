@@ -521,7 +521,6 @@ class PenSkin extends Skin {
     }
 
     // tw: sets the "quality" of the pen skin. Sn-Edit does not.
-        this.renderQuality = quality;
         this._setCanvasSize([Math.round(this._nativeSize[0] * quality), Math.round(this._nativeSize[1] * quality)]);
     /**
      * If there have been pen operations that have dirtied the canvas, update
