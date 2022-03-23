@@ -518,10 +518,14 @@ class PenSkin extends Skin {
         this._silhouetteImageData = new ImageData(width, height);
 
         this._silhouetteDirty = true;
+    };
+    
+    // tw: sets the "quality" of the pen skin. Sn-Edit does not. Still appearently this function is needed.
+    setRenderQuality (quality) {
+        const nativeSize = this._renderer.getNativeSize();
+        this.renderQuality = quality;
+        this._setCanvasSize([Math.round(nativeSize[0] * quality), Math.round(nativeSize[1] * quality)]);
     }
-
-    // tw: sets the "quality" of the pen skin. Sn-Edit does not.
-        this._setCanvasSize([Math.round(this._nativeSize[0] * quality), Math.round(this._nativeSize[1] * quality)]);
     /**
      * If there have been pen operations that have dirtied the canvas, update
      * now before someone wants to use our silhouette.
