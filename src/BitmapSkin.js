@@ -10,10 +10,13 @@ class BitmapSkin extends Skin {
      * @param {!RenderWebGL} renderer - The renderer which will use this skin.
      */
     constructor (id, renderer) {
-        super(id, renderer);
+        super(id);
 
         /** @type {!int} */
         this._costumeResolution = 1;
+
+        /** @type {!RenderWebGL} */
+        this._renderer = renderer;
 
         /** @type {Array<int>} */
         this._textureSize = [0, 0];
@@ -91,7 +94,7 @@ class BitmapSkin extends Skin {
         this._rotationCenter[0] = rotationCenter[0];
         this._rotationCenter[1] = rotationCenter[1];
 
-        this.emitWasAltered();
+        this.emit(Skin.Events.WasAltered);
     }
 
     /**
