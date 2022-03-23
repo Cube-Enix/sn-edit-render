@@ -2,7 +2,7 @@
 #### WebGL-based rendering engine for Scratch 3.0
 
 [![Build Status](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment)
-
+![State](https://img.shields.io/github/checks-status/Cube-Enix/sn-edit-render/develop)
 
 ## Installation
 ```bash
@@ -64,6 +64,3 @@ npm run build
 ```bash
 npm test
 ```
-
-## Donate
-We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
