@@ -1,8 +1,8 @@
 ## scratch-render
 #### WebGL-based rendering engine for Scratch 3.0
 
-[![Build Status](https://travis-ci.org/LLK/scratch-render.svg?branch=develop)](https://travis-ci.org/LLK/scratch-render)
-[![Greenkeeper badge](https://badges.greenkeeper.io/LLK/scratch-render.svg)](https://greenkeeper.io/)
+[![Build Status](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment)
+
 
 ## Installation
 ```bash
