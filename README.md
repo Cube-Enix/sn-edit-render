@@ -2,7 +2,7 @@
 #### WebGL-based rendering engine for Scratch 3.0
 
 [![Build Status](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Cube-Enix/sn-edit-render/actions/workflows/pages/pages-build-deployment)
-![State](https://img.shields.io/github/checks-status/Cube-Enix/sn-edit-render/develop)
+<!-- ![State](https://img.shields.io/github/checks-status/Cube-Enix/sn-edit-render/develop) -->
 
 ## Installation
 ```bash
