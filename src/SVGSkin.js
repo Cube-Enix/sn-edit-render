@@ -23,10 +23,7 @@ class SVGSkin extends Skin {
      * @extends Skin
      */
     constructor (id, renderer) {
-        super(id);
-
-        /** @type {RenderWebGL} */
-        this._renderer = renderer;
+        super(id, renderer);
 
         /** @type {HTMLImageElement} */
         this._svgImage = document.createElement('img');
@@ -106,6 +103,16 @@ class SVGSkin extends Skin {
      * @return {SVGMIP} An object that handles creating and updating SVG textures.
      */
     createMIP (scale) {
+        const isLargestMIP = this._largestMIPScale < scale;
+        // TW: Silhouette will lazily read image data from our <canvas>. However, this canvas is shared
+        // between the Skin and Silhouette so changing it here can mess up Silhouette. To prevent that,
+        // we will force the silhouette to synchronously read the image data before we mutate the
+        // canvas, unless the new MIP is the largest MIP, in which case doing so is unnecessary as we
+        // will update the silhouette later anyways.
+        if (!isLargestMIP) {
+            this._silhouette.unlazy();
+        }
+
         const [width, height] = this._size;
         this._canvas.width = width * scale;
         this._canvas.height = height * scale;
@@ -123,10 +130,9 @@ class SVGSkin extends Skin {
         this._context.setTransform(scale, 0, 0, scale, 0, 0);
         this._context.drawImage(this._svgImage, 0, 0);
 
-        // Pull out the ImageData from the canvas. ImageData speeds up
-        // updating Silhouette and is better handled by more browsers in
-        // regards to memory.
-        const textureData = this._context.getImageData(0, 0, this._canvas.width, this._canvas.height);
+        // TW: Reading image data from <canvas> is very slow and causes animations to stutter,
+        // so we just use the canvas directly instead.
+        const textureData = this._canvas;
 
         const textureOptions = {
             auto: false,
@@ -138,7 +144,7 @@ class SVGSkin extends Skin {
         const mip = twgl.createTexture(this._renderer.gl, textureOptions);
 
         // Check if this is the largest MIP created so far. Currently, silhouettes only get scaled up.
-        if (this._largestMIPScale < scale) {
+        if (isLargestMIP) {
             this._silhouette.update(textureData);
             this._largestMIPScale = scale;
         }
@@ -149,6 +155,7 @@ class SVGSkin extends Skin {
     updateSilhouette (scale = [100, 100]) {
         // Ensure a silhouette exists.
         this.getTexture(scale);
+        this._silhouette.unlazy();
     }
 
     /**
@@ -228,7 +235,7 @@ class SVGSkin extends Skin {
 
             this._svgImageLoaded = true;
 
-            this.emit(Skin.Events.WasAltered);
+            this.emitWasAltered();
         };
 
         this._svgImage.src = `data:image/svg+xml;utf8,${encodeURIComponent(svgText)}`;
