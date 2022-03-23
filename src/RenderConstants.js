@@ -12,16 +12,14 @@ module.exports = {
     ID_NONE: -1,
 
     /**
-     * Optimize for fewer than this number of Drawables sharing the same Skin.
-     * Going above this may cause middleware warnings or a performance penalty but should otherwise behave correctly.
-     * @const {int}
-     */
-    SKIN_SHARE_SOFT_LIMIT: 301,
-
-    /**
      * @enum {string}
      */
     Events: {
+        /**
+         * Event for when the high quality render option is changed
+         */
+        UseHighQualityRenderChanged: 'UseHighQualityRenderChanged',
+
         /**
          * NativeSizeChanged event
          *
